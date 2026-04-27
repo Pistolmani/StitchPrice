@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Scalar.AspNetCore;
 using StitchPrice.Api.Middleware;
 using StitchPrice.Application;
@@ -14,7 +15,8 @@ builder.Services
     .AddApplication()
     .AddInfrastructure(connectionString);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddOpenApi();
 
 builder.Services.AddCors(opts =>
