@@ -1,4 +1,5 @@
 using Scalar.AspNetCore;
+using StitchPrice.Api.Middleware;
 using StitchPrice.Application;
 using StitchPrice.Infrastructure;
 using StitchPrice.Infrastructure.Persistence;
@@ -34,6 +35,7 @@ if (app.Environment.IsDevelopment())
     await DatabaseSeeder.SeedAsync(db);
 }
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseCors("Frontend");
 app.UseHttpsRedirection();
 app.MapControllers();
